@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RecyCando</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #2E8B57;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #E0F7E0;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background-color: #3CB371;
+            color: white;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: white;
+            border: 1px solid white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/api/placeholder/1200/600') center/cover no-repeat;
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 2rem 0;
+            font-size: 2rem;
+            color: #2E8B57;
+        }
+
+        .cards-container {
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        .cards-wrapper {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            gap: 1.5rem;
+            padding: 1rem 0;
+        }
+
+        .cards-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+
+        .card {
+            flex: 0 0 300px;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-img {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: #2E8B57;
+        }
+
+        .card-text {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .card-link {
+            display: inline-block;
+            color: #2E8B57;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .card-link:hover {
+            text-decoration: underline;
+        }
+
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .carousel-control {
+            background-color: #2E8B57;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .carousel-control:hover {
+            background-color: #3CB371;
+        }
+
+        .collection-points {
+            background-color: #3CB371;
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 8px;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .collection-points h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        .collection-points p {
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .blog-posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .blog-post {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+        }
+
+        .blog-date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: #2E8B57;
+        }
+
+        .blog-excerpt {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background-color: #2E8B57;
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #E0F7E0;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            text-decoration: underline;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            color: #2E8B57;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-tabs {
+            display: flex;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .form-tab {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+
+        .form-tab.active {
+            border-bottom-color: #2E8B57;
+            color: #2E8B57;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .logo {
+                margin-bottom: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+                margin-bottom: 1rem;
+            }
+
+            .auth-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .hero {
+                padding: 3rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .collection-points {
+                padding: 2rem 1rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-recycle"></i>
+            <span>RecyCando</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Início</a></li>
+                <li><a href="#">Tipos de Resíduos</a></li>
+                <li><a href="#">Como Reciclar</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Sobre Nós</a></li>
+                <li><a href="#">Contato</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <button class="btn btn-outline" onclick="openModal('loginModal')">Entrar</button>
+            <button class="btn btn-primary" onclick="openModal('signupModal')">Cadastrar</button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Descarte Correto de Resíduos Sólidos</h1>
+        <p>Aprenda como descartar seus resíduos de forma correta e responsável, contribuindo para um planeta mais sustentável e saudável para as futuras gerações.</p>
+        <button class="btn btn-primary" onclick="window.location.href='home.html'">Encontrar Pontos de Coleta</button>
+    </section>
+
+    <main>
+        <section>
+            <h2 class="section-title">Como Descartar Corretamente</h2>
+            <div class="cards-container">
+                <div class="cards-wrapper" id="recyclableCards">
+                    <div class="card">
+                        <div class="card-img" style="background-image: url('assets/papelao.png')"></div>
+                        <div class="card-content">
+                            <h3 class="card-title">Papel e Papelão</h3>
+                            <p class="card-text">Saiba como preparar e descartar corretamente materiais como jornais, revistas, caixas e embalagens de papel.</p>
+                            <a href="#" class="card-link">Saiba mais</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img" style="background-image: url('assets/garrafas-de-vidro.jpg')"></div>
+                        <div class="card-content">
+                            <h3 class="card-title">Plásticos</h3>
+                            <p class="card-text">Dicas para identificar os diferentes tipos de plásticos e como prepará-los para a reciclagem adequada.</p>
+                            <a href="#" class="card-link">Saiba mais</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img" style="background-image: url('assets/latinha.jpg')"></div>
+                        <div class="card-content">
+                            <h3 class="card-title">Metais</h3>
+                            <p class="card-text">Como separar e preparar latas, tampas e outros materiais metálicos para o processo de reciclagem.</p>
+                            <a href="#" class="card-link">Saiba mais</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img" style="background-image: url('assets/residuos-organicos.jpg')"></div>
+                        <div class="card-content">
+                            <h3 class="card-title">Resíduos Orgânicos</h3>
+                            <p class="card-text">Descubra como compostar restos de alimentos e outros materiais orgânicos em casa.</p>
+                            <a href="#" class="card-link">Saiba mais</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-controls">
+                    <button class="carousel-control" onclick="scrollCards('left')">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-control" onclick="scrollCards('right')">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="collection-points">
+            <h2>Pontos de Coleta Próximos</h2>
+            <p>Encontre pontos de coleta seletiva, ecopontos e cooperativas de reciclagem próximos à sua localização. Contribua com o meio ambiente descartando seus resíduos nos locais adequados.</p>
+            <button class="btn btn-outline" onclick="window.location.href='home.html'">Encontrar Pontos de Coleta</button>
+        </section>
+
+        <section>
+            <h2 class="section-title">Blog: Descarte Consciente</h2>
+            <div class="blog-posts">
+                <div class="blog-post">
+                    <div class="blog-img" style="background-image: url('/assets/impacto.webp')"></div>
+                    <div class="blog-content">
+                        <div class="blog-date">12 de maio de 2025</div>
+                        <h3 class="blog-title">Os impactos do descarte incorreto de resíduos sólidos</h3>
+                        <p class="blog-excerpt">Conheça os principais problemas ambientais causados pelo descarte incorreto de lixo e como podemos minimizar esses impactos.</p>
+                        <a href="#" class="card-link">Ler mais</a>
+                    </div>
+                </div>
+                <div class="blog-post">
+                    <div class="blog-img" style="background-image: url('/assets/ap.jpeg')"></div>
+                    <div class="blog-content">
+                        <div class="blog-date">10 de maio de 2025</div>
+                        <h3 class="blog-title">Como iniciar uma compostagem em apartamentos</h3>
+                        <p class="blog-excerpt">Dicas práticas para quem mora em espaços pequenos e quer começar a compostar seus resíduos orgânicos de forma simples.</p>
+                        <a href="#" class="card-link">Ler mais</a>
+                    </div>
+                </div>
+                <div class="blog-post">
+                    <div class="blog-img" style="background-image: url('/assets/foto-logistica-reversa.jpg')"></div>
+                    <div class="blog-content">
+                        <div class="blog-date">5 de maio de 2025</div>
+                        <h3 class="blog-title">Logística reversa: o que é e como funciona</h3>
+                        <p class="blog-excerpt">Entenda como funciona o processo de devolução de produtos e embalagens para os fabricantes e a importância dessa prática.</p>
+                        <a href="#" class="card-link">Ler mais</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>RecyCando</h3>
+                <p>Promovendo a conscientização sobre o descarte correto de resíduos sólidos e incentivando práticas sustentáveis para um futuro melhor.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Links Úteis</h3>
+                <ul>
+                    <li><a href="#">Tipos de Resíduos</a></li>
+                    <li><a href="#">Como Reciclar</a></li>
+                    <li><a href="index.html">Pontos de Coleta</a></li>
+                    <li><a href="#">Legislação Ambiental</a></li>
+                    <li><a href="#">Para Empresas</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 EcoConsciente. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('loginModal')">&times;</span>
+            <h2>Entrar</h2>
+            <div class="form-tabs">
+                <div class="form-tab active" onclick="switchTab(this, 'userLogin')">Usuário</div>
+                <div class="form-tab" onclick="switchTab(this, 'companyLogin')">Empresa</div>
+            </div>
+            <form id="userLogin">
+                <div class="form-group">
+                    <label for="userEmail">E-mail</label>
+                    <input type="email" id="userEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="userPassword">Senha</label>
+                    <input type="password" id="userPassword" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Entrar</button>
+                <p style="text-align: center; margin-top: 1rem;">
+                    Ainda não tem uma conta? <a href="#" onclick="openModal('signupModal'); closeModal('loginModal')">Cadastre-se</a>
+                </p>
+            </form>
+            <form id="companyLogin" style="display: none;">
+                <div class="form-group">
+                    <label for="companyEmail">E-mail Corporativo</label>
+                    <input type="email" id="companyEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="companyPassword">Senha</label>
+                    <input type="password" id="companyPassword" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Entrar como Empresa</button>
+                <p style="text-align: center; margin-top: 1rem;">
+                    Sua empresa ainda não está cadastrada? <a href="#" onclick="openModal('companySignupModal'); closeModal('loginModal')">Cadastrar Empresa</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="signupModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('signupModal')">&times;</span>
+            <h2>Cadastrar</h2>
+            <div class="form-tabs">
+                <div class="form-tab active" onclick="switchTab(this, 'userSignup')">Usuário</div>
+                <div class="form-tab" onclick="switchTab(this, 'companySignup')">Empresa</div>
+            </div>
+            <form id="userSignup">
+                <div class="form-group">
+                    <label for="newUserName">Nome Completo</label>
+                    <input type="text" id="newUserName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="newUserEmail">E-mail</label>
+                    <input type="email" id="newUserEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="newUserPhone">Telefone</label>
+                    <input type="tel" id="newUserPhone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="newUserPassword">Senha</label>
+                    <input type="password" id="newUserPassword" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmUserPassword">Confirmar Senha</label>
+                    <input type="password" id="confirmUserPassword" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Cadastrar</button>
+                <p style="text-align: center; margin-top: 1rem;">
+                    Já tem uma conta? <a href="#" onclick="openModal('loginModal'); closeModal('signupModal')">Entrar</a>
+                </p>
+            </form>
+            <form id="companySignup" style="display: none;">
+                <div class="form-group">
+                    <label for="companyName">Nome da Empresa</label>
+                    <input type="text" id="companyName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="companyCNPJ">CNPJ</label>
+                    <input type="text" id="companyCNPJ" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="newCompanyEmail">E-mail</label>
+                    <input type="email" id="newCompanyEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="newCompanyPassword">Senha</label>
+                    <input type="password" id="newCompanyPassword" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmCompanyPassword">Confirmar Senha</label>
+                    <input type="password" id="confirmCompanyPassword" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Cadastrar Empresa</button>
+                <p style="text-align: center; margin-top: 1rem;">
+                    Sua empresa já está cadastrada? <a href="#" onclick="openModal('loginModal'); closeModal('signupModal')">Entrar</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="collectionModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('collectionModal')">&times;</span>
+            <h2>Encontrar Pontos de Coleta</h2>
+            <p>Para acessar os pontos de coleta mais próximos de você, faça login ou cadastre-se em nossa plataforma:</p>
+            <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                <button onclick="openModal('loginModal'); closeModal('collectionModal')" class="btn btn-primary" style="flex: 1;">Entrar</button>
+                <button onclick="openModal('signupModal'); closeModal('collectionModal')" class="btn btn-outline" style="flex: 1; background-color: #f5f5f5; color: #333;">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Carousel functionality
+        function scrollCards(direction) {
+            const container = document.getElementById('recyclableCards');
+            const scrollAmount = 330; // Card width + gap
+            
+            if (direction === 'left') {
+                container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            } else {
+                container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
+        }
+
+        // Modal functionality
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto'; // Enable scrolling again
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modals = document.getElementsByClassName('modal');
+            for (let i = 0; i < modals.length; i++) {
+                if (event.target === modals[i]) {
+                    closeModal(modals[i].id);
+                }
+            }
+        }
+
+        // Tab switching functionality
+        function switchTab(tabElement, formId) {
+            // Remove active class from all tabs
+            const tabs = document.getElementsByClassName('form-tab');
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active');
+            }
+            
+            // Add active class to clicked tab
+            tabElement.classList.add('active');
+            
+            // Hide all forms
+            const forms = tabElement.parentElement.parentElement.getElementsByTagName('form');
+            for (let i = 0; i < forms.length; i++) {
+                forms[i].style.display = 'none';
+            }
+            
+            // Show selected form
+            document.getElementById(formId).style.display = 'block';
+        }
+
+        // Form submission handling
+        document.addEventListener('DOMContentLoaded', function() {
+            // User Login Form
+            document.getElementById('userLogin').addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Normally this would send data to a server, but for this demo we'll just simulate login
+                alert('Login realizado com sucesso! Redirecionando para página principal...');
+                // Redirect to user dashboard would happen here in a real application
+                closeModal('loginModal');
+            });
+
+            // Company Login Form
+            document.getElementById('companyLogin').addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Simulate company login
+                alert('Login empresarial realizado com sucesso! Redirecionando para painel da empresa...');
+                // Redirect to company dashboard would happen here
+                closeModal('loginModal');
+            });
+
+            // User Signup Form
+            document.getElementById('userSignup').addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Validate passwords match
+                const password = document.getElementById('newUserPassword').value;
+                const confirmPassword = document.getElementById('confirmUserPassword').value;
+                
+                if (password !== confirmPassword) {
+                    alert('As senhas não correspondem. Por favor, tente novamente.');
+                    return;
+                }
+                
+                // Simulate user registration
+                alert('Cadastro realizado com sucesso! Você será redirecionado para sua página de usuário.');
+                // Redirect to user dashboard would happen here
+                closeModal('signupModal');
+            });
+
+            // Company Signup Form
+            document.getElementById('companySignup').addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Validate passwords match
+                const password = document.getElementById('newCompanyPassword').value;
+                const confirmPassword = document.getElementById('confirmCompanyPassword').value;
+                
+                if (password !== confirmPassword) {
+                    alert('As senhas não correspondem. Por favor, tente novamente.');
+                    return;
+                }
+                
+                // Validate CNPJ format (simplified validation)
+                const cnpj = document.getElementById('companyCNPJ').value;
+                if (cnpj.length !== 14 && cnpj.length !== 18) {
+                    alert('Por favor, insira um CNPJ válido.');
+                    return;
+                }
+                
+                // Simulate company registration
+                alert('Cadastro empresarial realizado com sucesso! Você será redirecionado para o painel da empresa.');
+                // Redirect to company dashboard would happen here
+                closeModal('signupModal');
+            });
+        });
+
+        // Auto-scrolling carousel
+        let carouselInterval;
+        
+        function startCarousel() {
+            carouselInterval = setInterval(() => {
+                scrollCards('right');
+            }, 5000); // Scroll every 5 seconds
+        }
+        
+        function stopCarousel() {
+            clearInterval(carouselInterval);
+        }
+        
+        // Start auto-scrolling when page loads
+        document.addEventListener('DOMContentLoaded', startCarousel);
+        
+        // Stop auto-scrolling when user interacts with carousel
+        document.getElementById('recyclableCards').addEventListener('mouseenter', stopCarousel);
+        document.getElementById('recyclableCards').addEventListener('touchstart', stopCarousel);
+        
+        // Resume auto-scrolling when user stops interacting
+        document.getElementById('recyclableCards').addEventListener('mouseleave', startCarousel);
+        document.getElementById('recyclableCards').addEventListener('touchend', startCarousel);
+    </script>
+</body>
+</html> 

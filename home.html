@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RecyCando</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+</head>
+<body>
+    <div class="conteudo">
+        <!-- Cabeçalho -->
+        <header class="cabecalho">
+            <div class="cabecalho__logo">
+                <img src="/assets/logo.png" alt="Logo EcoColeta" width="40" height="40">
+                <h1>RecyCando</h1>
+            </div>
+            <div class="cabecalho__pesquisa">
+                <button class="cabecalho__botao-perfil">
+                    <i class="fas fa-user"></i>
+                    <span>Perfil</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Hero com Mapa -->
+            <section class="secao secao-mapa">
+                <h2 class="secao__titulo">Pontos de Coleta</h2>
+                <div class="mapa__container">
+                    <div id="mapa" class="mapa__area"></div>
+                    <div class="mapa__controles">
+                        <button class="mapa__botao-zoom mapa__botao-mais" aria-label="Aumentar zoom" onclick="map.zoomIn()">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                        <button class="mapa__botao-zoom mapa__botao-menos" aria-label="Diminuir zoom" onclick="map.zoomOut()">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+            
+
+        <!-- Alertas -->
+        <section class="alerta" id="alertaColeta">
+            <div class="alerta__icone">
+                <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <div class="alerta__conteudo">
+                <h3 class="alerta__titulo">Coleta de móveis grandes amanhã no seu bairro!</h3>
+                <p class="alerta__texto">Deixe seus itens na calçada até as 8h da manhã.</p>
+            </div>
+            <button class="alerta__botao-fechar" aria-label="Fechar alerta">
+                <i class="fas fa-times"></i>
+            </button>
+        </section>
+
+        <!-- Serviços -->
+        <section class="secao secao-servicos">
+            <h2 class="secao__titulo">Nossos Serviços</h2>
+            
+            <div class="servicos__grid">
+                <!-- Compostagem -->
+                <div class="cartao servico__cartao" data-tipo="compostagem">
+                    <div class="servico__icone">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="servico__conteudo">
+                        <h3 class="servico__titulo">Compostagem Doméstica</h3>
+                        <p class="servico__subtitulo">Aprenda como começar</p>
+                        <div class="servico__detalhes">
+                            <button class="servico__botao-expandir">
+                                Mais informações
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="servico__descricao escondido">
+                                <p>Reduza seu lixo orgânico em até 50% e produza adubo natural para suas plantas.</p>
+                                <a href="#compostagem" class="servico__link">Ver guia completo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Eletrônicos -->
+                <div class="cartao servico__cartao" data-tipo="eletronicos">
+                    <div class="servico__icone">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <div class="servico__conteudo">
+                        <h3 class="servico__titulo">Eletrônicos</h3>
+                        <p class="servico__subtitulo">Descarte correto</p>
+                        <div class="servico__detalhes">
+                            <button class="servico__botao-expandir">
+                                Mais informações
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="servico__descricao escondido">
+                                <p>Eletrônicos contêm materiais tóxicos que precisam de tratamento especial. Encontre locais especializados mais próximos.</p>
+                                <a href="#" class="servico__link">Ver pontos de coleta</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Móveis -->
+                <div class="cartao servico__cartao" data-tipo="moveis">
+                    <div class="servico__icone">
+                        <i class="fas fa-couch"></i>
+                    </div>
+                    <div class="servico__conteudo">
+                        <h3 class="servico__titulo">Móveis Grandes</h3>
+                        <p class="servico__subtitulo">Agendamento de coleta</p>
+                        <div class="servico__detalhes">
+                            <button class="servico__botao-expandir">
+                                Mais informações
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="servico__descricao escondido">
+                                <p>Agende uma coleta especial na porta da sua casa para móveis e objetos de grande porte.</p>
+                                <a href="#agendar" class="servico__link">Agendar agora</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formulário de Agendamento -->
+        <section class="secao secao-formulario" id="agendar">
+            <h2 class="secao__titulo">Agende sua Coleta Especial</h2>
+            
+            <form class="formulario" id="formularioAgendamento">
+                <div class="formulario__grupo">
+                    <label class="formulario__rotulo" for="nomeCompleto">Nome Completo</label>
+                    <input type="text" id="nomeCompleto" class="formulario__campo" required>
+                    <span class="formulario__erro"></span>
+                </div>
+                
+                <div class="formulario__linha">
+                    <div class="formulario__grupo formulario__grupo--meio">
+                        <label class="formulario__rotulo" for="cep">CEP</label>
+                        <input type="text" id="cep" class="formulario__campo" placeholder="00000-000" maxlength="9" required>
+                        <span class="formulario__erro"></span>
+                    </div>
+                    
+                    <div class="formulario__grupo formulario__grupo--meio">
+                        <label class="formulario__rotulo" for="telefone">Telefone</label>
+                        <input type="tel" id="telefone" class="formulario__campo" placeholder="(00) 00000-0000" required>
+                        <span class="formulario__erro"></span>
+                    </div>
+                </div>
+                
+                <div class="formulario__grupo">
+                    <label class="formulario__rotulo" for="endereco">Endereço</label>
+                    <input type="text" id="endereco" class="formulario__campo" placeholder="Rua, número, complemento" required>
+                    <span class="formulario__erro"></span>
+                </div>
+                
+                <div class="formulario__grupo">
+                    <span class="formulario__rotulo">Tipo de resíduo</span>
+                    <div class="formulario__opcoes">
+                        <label class="formulario__opcao">
+                            <input type="radio" name="tipoResiduo" value="sofa"> 
+                            <span class="formulario__opcao-custom"></span>
+                            Sofá
+                        </label>
+                        <label class="formulario__opcao">
+                            <input type="radio" name="tipoResiduo" value="geladeira"> 
+                            <span class="formulario__opcao-custom"></span>
+                            Geladeira
+                        </label>
+                        <label class="formulario__opcao">
+                            <input type="radio" name="tipoResiduo" value="madeira"> 
+                            <span class="formulario__opcao-custom"></span>
+                            Madeira
+                        </label>
+                        <label class="formulario__opcao">
+                            <input type="radio" name="tipoResiduo" value="outros"> 
+                            <span class="formulario__opcao-custom"></span>
+                            Outros
+                        </label>
+                    </div>
+                    <span class="formulario__erro"></span>
+                </div>
+                
+                <div class="formulario__linha">
+                    <div class="formulario__grupo formulario__grupo--meio">
+                        <label class="formulario__rotulo" for="dataColeta">Data desejada</label>
+                        <input type="date" id="dataColeta" class="formulario__campo" required>
+                        <span class="formulario__erro"></span>
+                    </div>
+                    
+                    <div class="formulario__grupo formulario__grupo--meio">
+                        <label class="formulario__rotulo" for="horarioColeta">Horário sugerido</label>
+                        <select id="horarioColeta" class="formulario__campo" required>
+                            <option value="">Selecione o horário</option>
+                            <option value="8-10">8h às 10h</option>
+                            <option value="10-12">10h às 12h</option>
+                            <option value="13-15">13h às 15h</option>
+                            <option value="15-17">15h às 17h</option>
+                        </select>
+                        <span class="formulario__erro"></span>
+                    </div>
+                </div>
+                
+                <div class="formulario__grupo">
+                    <label class="formulario__rotulo" for="observacoes">Observações (opcional)</label>
+                    <textarea id="observacoes" class="formulario__campo formulario__campo--texto" rows="3"></textarea>
+                </div>
+                
+                <div class="formulario__acoes">
+                    <button type="submit" class="botao botao--primario">
+                        <i class="fas fa-calendar-check"></i>
+                        Confirmar Agendamento
+                    </button>
+                    <button type="reset" class="botao botao--secundario">
+                        <i class="fas fa-times"></i>
+                        Limpar
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Seção de Compostagem -->
+        <section class="secao secao-compostagem" id="compostagem">
+            <h2 class="secao__titulo">Compostagem Doméstica: Pequenas ações, grandes mudanças!</h2>
+            
+            <div class="cartao cartao--destaque">
+                <div class="cartao__icone">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <p class="cartao__texto">"A compostagem reduz o lixo em até 50% e ajuda a melhorar o solo urbano."</p>
+            </div>
+            
+            <h3 class="subsecao__titulo">Como começar?</h3>
+            <div class="etapas__grid">
+                <div class="cartao etapa__cartao">
+                    <div class="etapa__numero">1</div>
+                    <h4 class="etapa__titulo">Balde caseiro</h4>
+                    <p class="etapa__texto">Use um balde com tampa para iniciar sua composteira caseira. Faça pequenos furos na tampa para ventilação.</p>
+                </div>
+                
+                <div class="cartao etapa__cartao">
+                    <div class="etapa__numero">2</div>
+                    <h4 class="etapa__titulo">Minhocas</h4>
+                    <p class="etapa__texto">Adicione minhocas californianas para acelerar o processo de compostagem e melhorar a qualidade do composto.</p>
+                </div>
+                
+                <div class="cartao etapa__cartao">
+                    <div class="etapa__numero">3</div>
+                    <h4 class="etapa__titulo">Resíduos permitidos</h4>
+                    <p class="etapa__texto">Cascas de frutas, borra de café, folhas secas. Evite alimentos cozidos, carnes ou gorduras.</p>
+                </div>
+            </div>
+            
+            <h3 class="subsecao__titulo">Benefícios</h3>
+            <ul class="beneficios__lista">
+                <li class="beneficios__item">Reduz resíduos em aterros sanitários</li>
+                <li class="beneficios__item">Produz adubo natural para suas plantas</li>
+                <li class="beneficios__item">Diminui emissão de gases do efeito estufa</li>
+                <li class="beneficios__item">Promove conscientização ambiental na família</li>
+                <li class="beneficios__item">Economiza na compra de fertilizantes</li>
+            </ul>
+            
+            <div class="galeria">
+                <h3 class="subsecao__titulo">Galeria Inspiradora</h3>
+                <div class="galeria__grid">
+                    <div class="galeria__item">
+                        <img src="/assets/composteira.jpg" alt="Composteira caseira" class="galeria__imagem">
+                        <p class="galeria__legenda">Composteira caseira</p>
+                    </div>
+                    <div class="galeria__item">
+                        <img src="/assets/compostos.JPG" alt="Composto pronto" class="galeria__imagem">
+                        <p class="galeria__legenda">Composto pronto</p>
+                    </div>
+                    <div class="galeria__item">
+                        <img src="/assets/horta-urbana.jpg" alt="Horta urbana" class="galeria__imagem">
+                        <p class="galeria__legenda">Horta urbana</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cartao cartao--denuncia">
+                <div class="denuncia__conteudo">
+                    <div class="denuncia__icone">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div>
+                        <h3 class="denuncia__titulo">Denúncia</h3>
+                        <p class="denuncia__texto">Viu algum descarte irregular de resíduos? Ajude a manter nossa cidade limpa.</p>
+                    </div>
+                </div>
+                <button class="botao botao--denuncia" id="botaoDenuncia">
+                    <i class="fas fa-bullhorn"></i>
+                    Denunciar
+                </button>
+            </div>
+        </section>
+
+        <!-- Modal de Denúncia -->
+        <div class="modal" id="modalDenuncia">
+            <div class="modal__conteudo">
+                <div class="modal__cabecalho">
+                    <h3 class="modal__titulo">Denunciar Descarte Irregular</h3>
+                    <button class="modal__fechar" aria-label="Fechar modal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form class="formulario" id="formularioDenuncia">
+                    <div class="formulario__grupo">
+                        <label class="formulario__rotulo" for="localDenuncia">Localização</label>
+                        <input type="text" id="localDenuncia" class="formulario__campo" placeholder="Endereço ou referência" required>
+                    </div>
+                    <div class="formulario__grupo">
+                        <label class="formulario__rotulo" for="tipoDenuncia">Tipo de resíduo</label>
+                        <select id="tipoDenuncia" class="formulario__campo" required>
+                            <option value="">Selecione o tipo</option>
+                            <option value="entulho">Entulho</option>
+                            <option value="lixo">Lixo doméstico</option>
+                            <option value="moveis">Móveis</option>
+                            <option value="eletronicos">Eletrônicos</option>
+                            <option value="outros">Outros</option>
+                        </select>
+                    </div>
+                    <div class="formulario__grupo">
+                        <label class="formulario__rotulo" for="descricaoDenuncia">Descrição</label>
+                        <textarea id="descricaoDenuncia" class="formulario__campo formulario__campo--texto" rows="3" required></textarea>
+                    </div>
+                    <div class="formulario__grupo">
+                        <label class="formulario__rotulo" for="fotoDenuncia">Adicionar foto (opcional)</label>
+                        <input type="file" id="fotoDenuncia" class="formulario__campo formulario__campo--arquivo" accept="image/*">
+                    </div>
+                    <div class="formulario__acoes">
+                        <button type="submit" class="botao botao--primario">Enviar Denúncia</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Rodapé -->
+        <footer class="rodape">
+            <div class="rodape__colunas">
+                <div class="rodape__coluna rodape__coluna--sobre">
+                    <h3 class="rodape__titulo">RecyCando</h3>
+                    <p class="rodape__texto">Transformando o descarte de resíduos em uma experiência simples e consciente para um futuro mais sustentável.</p>
+                    <div class="rodape__social">
+                        <a href="#" class="rodape__icone" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="rodape__icone" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="rodape__icone" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="rodape__coluna rodape__coluna--links">
+                    <h3 class="rodape__titulo">Links Rápidos</h3>
+                    <ul class="rodape__lista">
+                        <li><a href="#" class="rodape__link">Mapa de Coleta</a></li>
+                        <li><a href="#compostagem" class="rodape__link">Compostagem</a></li>
+                        <li><a href="#agendar" class="rodape__link">Agendar Coleta</a></li>
+                        <li><a href="#" class="rodape__link">Educação Ambiental</a></li>
+                        <li><a href="#" class="rodape__link">Parceiros</a></li>
+                    </ul>
+                </div>
+                
+                <div class="rodape__coluna rodape__coluna--contato">
+                    <h3 class="rodape__titulo">Contato</h3>
+                    <ul class="rodape__lista rodape__lista--contato">
+                        <li class="rodape__item-contato">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:https://www.saoluis.ma.gov.br/denuncias---sulip/" class="rodape__link">Denuncias Sulip</a>
+                        </li>
+                        <li class="rodape__item-contato">
+                            <i class="fas fa-phone-alt"></i>
+                            <a href="800 098 1336" class="rodape__link">Telefone Fixo</a>
+                        </li>
+                        <li class="rodape__item-contato">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <a href="https://www.google.com/maps/place/Prefeitura+Municipal+de+S%C3%A3o+Lu%C3%ADs/@-2.5274927,-44.3158876,15z/data=!3m1!4b1!4m6!3m5!1s0x7f68f752989c79d:0xd52a3499b1b5b678!8m2!3d-2.5275142!4d-44.3055878!16s%2Fg%2F11kr7vqk_b?entry=ttu&g_ep=EgoyMDI1MDQyMy4wIKXMDSoASAFQAw%3D%3D" class="rodape__link">Av. Pedro II, S/N° - Palácio De La Ravardière - Centro - São Luís
+                                CEP: 65010-904</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="rodape__coluna rodape__coluna--newsletter">
+                    <h3 class="rodape__titulo">Newsletter</h3>
+                    <p class="rodape__texto">Receba novidades e dicas sustentáveis</p>
+                    <form class="rodape__formulario">
+                        <input type="email" placeholder="Seu e-mail" class="rodape__campo" required>
+                        <button type="submit" class="rodape__botao">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="rodape__direitos">
+                <p>© 2025 RecyCando. Todos os direitos reservados.</p>
+                <div class="rodape__links-pequenos">
+                    <a href="#" class="rodape__link-pequeno">Política de Privacidade</a>
+                    <a href="#" class="rodape__link-pequeno">Termos de Uso</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <script src="script.js"></script>
+</body>
+</html>
