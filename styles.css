@@ -399,6 +399,30 @@ a:hover {
     font-size: 0.9rem;
 }
 
+.mensagem-sucesso {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.1rem;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.mensagem-sucesso.visivel {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.oculto {
+    display: none;
+}
+
+
 .formulario__campo {
     width: 100%;
     padding: 12px 15px;
