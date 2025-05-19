@@ -34,8 +34,8 @@ navigator.geolocation.getCurrentPosition(function(position) {
         { nome: "Ecoponto Avenida dos Holandeses", lat: -2.490109, lng: -44.227874 },
         { nome: "Ecoponto Cidade Operária", lat: -2.596097, lng: -44.197332 },
         { nome: "Ecoponto Jardim Renascença", lat: -2.494993, lng: -44.286625},
-        { nome: "Ecoponto Bairro de Fátima", lat: -2.550231, lng: -2.550231},
-        { nome: "Ecoponto Recanto do Vinhais", lat: 2.520941, lng: -44.260126},
+        { nome: "Ecoponto Bairro de Fátima", lat: -2.550389, lng: -44.282852},
+        { nome: "Ecoponto Recanto do Vinhais", lat: -2.521084, lng: -44.260044},
         { nome: "Ecoponto do Anil", lat: -2.551214, lng: -44.236039},
         { nome: "Ecoponto Angelim", lat: -2.531015, lng: -44.233776},
         { nome: "Ecoponto Turu", lat: -2.506294, lng: -44.224204},
@@ -91,35 +91,42 @@ function inicializarBotoesExpandir() {
  */
 function inicializarFormulario() {
     const formularioAgendamento = document.getElementById('formularioAgendamento');
-    
+    const mensagemSucesso = document.getElementById('mensagemSucesso');
+
     if (formularioAgendamento) {
         formularioAgendamento.addEventListener('submit', (e) => {
             e.preventDefault();
-            
+
             if (validarFormulario(formularioAgendamento)) {
-                // Simulação de envio
                 const botaoSubmit = formularioAgendamento.querySelector('button[type="submit"]');
                 const textoOriginal = botaoSubmit.innerHTML;
-                
+
                 botaoSubmit.disabled = true;
                 botaoSubmit.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processando...';
-                
-                // Simula o tempo de processamento
+
                 setTimeout(() => {
-                    // Feedback visual de sucesso
+                    // Notificação padrão
                     mostrarNotificacao('Agendamento realizado com sucesso! Em breve entraremos em contato.', 'sucesso');
-                    
-                    // Resetar o formulário
+
+                    // Resetar formulário
                     formularioAgendamento.reset();
-                    
-                    // Restaurar o botão
+
+                    // Restaurar botão
                     botaoSubmit.disabled = false;
                     botaoSubmit.innerHTML = textoOriginal;
+
+                    // Mostrar mensagem animada
+                    if (mensagemSucesso) {
+                        mensagemSucesso.classList.remove('oculto');
+                        setTimeout(() => {
+                            mensagemSucesso.classList.add('visivel');
+                        }, 100);
+                    }
                 }, 1500);
             }
         });
     }
-    
+
     // Formulário de denúncia
     const formularioDenuncia = document.getElementById('formularioDenuncia');
     
