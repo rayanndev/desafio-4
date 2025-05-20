@@ -404,6 +404,25 @@
             color: #2E8B57;
             font-weight: 500;
         }
+            .cabecalho__botao-perfil {
+                display: flex;
+                align-items: center;
+                background: none;
+                border: none;
+                color: white;
+                cursor: pointer;
+            }
+
+            /* Estilo para alertas na página inicial */
+            .alerta-index {
+                background-color: #ffebee;
+                border-left: 4px solid #f44336;
+                padding: 15px;
+                margin: 20px auto;
+                max-width: 800px;
+                border-radius: 4px;
+                text-align: center;
+            }
 
         @media (max-width: 768px) {
             header {
@@ -465,7 +484,7 @@
         <nav>
             <ul>
                 <li><a href="#">Início</a></li>
-                <li><a href="#">Tipos de Resíduos</a></li>
+                <li><a href="">Tipos de Resíduos</a></li>
                 <li><a href="#">Como Reciclar</a></li>
                 <li><a href="#">Blog</a></li>
                 <li><a href="#">Sobre Nós</a></li>
@@ -586,7 +605,6 @@
                     <li><a href="#">Como Reciclar</a></li>
                     <li><a href="index.html">Pontos de Coleta</a></li>
                     <li><a href="#">Legislação Ambiental</a></li>
-                    <li><a href="#">Para Empresas</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -713,6 +731,43 @@
     </div>
 
     <script>
+        // No formulário de cadastro de usuário
+            document.getElementById('userSignup').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Validar senhas
+                const password = document.getElementById('newUserPassword').value;
+                const confirmPassword = document.getElementById('confirmUserPassword').value;
+                
+                if (password !== confirmPassword) {
+                    alert('As senhas não correspondem!');
+                    return;
+                }
+                
+                // Criar objeto do usuário
+                const usuario = {
+                    nome: document.getElementById('newUserName').value,
+                    email: document.getElementById('newUserEmail').value,
+                    telefone: document.getElementById('newUserPhone').value,
+                    senha: password
+                };
+                
+                // Salvar no localStorage (simulando banco de dados)
+                let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+                usuarios.push(usuario);
+                localStorage.setItem('usuarios', JSON.stringify(usuarios));
+                
+                // Salvar como usuário logado
+                localStorage.setItem('usuarioLogado', JSON.stringify({
+                    nome: usuario.nome,
+                    email: usuario.email
+                }));
+                
+                alert('Cadastro realizado com sucesso!');
+                closeModal('signupModal');
+                window.location.href = 'home.html';
+            });
+
         // Carousel functionality
         function scrollCards(direction) {
             const container = document.getElementById('recyclableCards');
@@ -776,6 +831,7 @@
                 alert('Login realizado com sucesso! Redirecionando para página principal...');
                 // Redirect to user dashboard would happen here in a real application
                 closeModal('loginModal');
+                window.location.href = 'home.html';
             });
 
             // Company Login Form
@@ -785,6 +841,7 @@
                 alert('Login empresarial realizado com sucesso! Redirecionando para painel da empresa...');
                 // Redirect to company dashboard would happen here
                 closeModal('loginModal');
+                window.location.href = 'home.html';
             });
 
             // User Signup Form
@@ -855,5 +912,66 @@
         document.getElementById('recyclableCards').addEventListener('mouseleave', startCarousel);
         document.getElementById('recyclableCards').addEventListener('touchend', startCarousel);
     </script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 </body>
+<script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCl08g46uEnhuhYKxqT8lNB7bfo4AjgIQM",
+            authDomain: "econeta-279df.firebaseapp.com",
+            projectId: "econeta-279df",
+            storageBucket: "econeta-279df.firebasestorage.app",
+            messagingSenderId: "119998589136",
+            appId: "1:119998589136:web:11bfd177aeff3d52ca56d5",
+            measurementId: "G-NBPLEKKXP5"
+        };
+
+        // Inicializar Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Função para cadastrar usuário com Firebase
+        function cadastrarUsuarioFirebase(nome, email, telefone, senha) {
+            auth.createUserWithEmailAndPassword(email, senha)
+                .then((userCredential) => {
+                    // Salvar dados adicionais no Firestore
+                    return db.collection('usuarios').doc(userCredential.user.uid).set({
+                        nome: nome,
+                        email: email,
+                        telefone: telefone
+                    });
+                })
+                .then(() => {
+                    alert('Cadastro realizado com sucesso!');
+                    window.location.href = 'home.html';
+                })
+                .catch((error) => {
+                    alert('Erro no cadastro: ' + error.message);
+                });
+        }
+
+        // Função para login com Firebase
+        function fazerLoginFirebase(email, senha) {
+            auth.signInWithEmailAndPassword(email, senha)
+                .then((userCredential) => {
+                    // Buscar dados do usuário
+                    return db.collection('usuarios').doc(userCredential.user.uid).get();
+                })
+                .then((doc) => {
+                    if (doc.exists) {
+                        localStorage.setItem('usuarioLogado', JSON.stringify(doc.data()));
+                        alert('Login realizado com sucesso!');
+                        window.location.href = 'home.html';
+                    } else {
+                        alert('Dados do usuário não encontrados!');
+                    }
+                })
+                .catch((error) => {
+                    alert('Erro no login: ' + error.message);
+                });
+        }
+</script>
+</script>
 </html> 
