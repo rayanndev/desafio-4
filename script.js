@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     inicializarMapaInterativo();
     inicializarMascarasCampos();
     inicializarFiltrosInterativos();
+    verificarUsuariLogado();
 });
 
 let map;
@@ -59,6 +60,44 @@ navigator.geolocation.getCurrentPosition(function(position) {
 
 }, function(error) {
     alert("Não foi possível obter sua localização.");
+});
+
+    const coletasProgramadas = {
+        "2025-05-21": ["Areinha", "Cohab", "São Francisco", "Bacanga"],
+        "2025-05-22": ["Turu", "João Paulo", "Vinhais"],
+        "2025-05-23": ["Anil", "Renascença", "Olho d'Água"]
+    };
+
+        function atualizarAlertaColeta() {
+            const hoje = new Date().toISOString().split('T')[0];
+            const alertaColeta = document.getElementById('alertaColeta');
+            
+            if (coletasProgramadas[hoje]) {
+                const bairros = coletasProgramadas[hoje].join(', ');
+                alertaColeta.querySelector('.alerta__titulo').textContent = `Coleta programada para hoje nos bairros: ${bairros}`;
+                alertaColeta.querySelector('.alerta__texto').textContent = 'Por favor, deixe seus resíduos na calçada até as 8h da manhã.';
+                alertaColeta.style.display = 'flex';
+            } else {
+                alertaColeta.style.display = 'none';
+            }
+        }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                atualizarAlertaColeta();
+            });
+
+function verificarUsuarioLogado() {
+    const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
+    
+    if (usuarioLogado) {
+        document.getElementById('nomeUsuario').textContent = usuarioLogado.nome;
+    }
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    verificarUsuarioLogado();
+
 });
 
 function inicializarBotoesExpandir() {
