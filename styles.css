@@ -205,21 +205,44 @@ a:hover {
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-/* Alertas */
-.alerta {
+
+/* Estilo para o nome do usuário no header */
+.cabecalho__botao-perfil {
     display: flex;
     align-items: center;
-    gap: 15px;
-    padding: 15px 20px;
-    margin-bottom: 25px;
-    background-color: var(--cor-alerta-clara);
-    border-left: 4px solid var(--cor-alerta);
-    border-radius: var(--borda-arredondada);
+    background: none;
+    border: none;
+    color: #2E8B57; /* Verde escuro para combinar com o tema */
+    cursor: pointer;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.cabecalho__botao-perfil:hover {
+    background-color: rgba(46, 139, 87, 0.1);
+}
+
+.cabecalho__botao-perfil i {
+    margin-right: 8px;
+}
+
+/* Estilo para o alerta vermelho de coleta */
+.alerta {
+    background-color: #ffebee;
+    border-left: 4px solid #f44336;
+    padding: 15px;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
 }
 
 .alerta__icone {
+    color: #f44336;
+    margin-right: 15px;
     font-size: 24px;
-    color: var(--cor-alerta);
 }
 
 .alerta__conteudo {
@@ -227,23 +250,24 @@ a:hover {
 }
 
 .alerta__titulo {
-    margin-bottom: 5px;
-    font-size: 1rem;
+    margin: 0;
+    color: #d32f2f;
+    font-size: 16px;
 }
 
 .alerta__texto {
-    margin-bottom: 0;
-    font-size: 0.9rem;
+    margin: 5px 0 0;
+    color: #5f2120;
+    font-size: 14px;
 }
 
 .alerta__botao-fechar {
-    background: transparent;
+    background: none;
     border: none;
-    color: var(--cor-texto-secundaria);
+    color: #f44336;
     cursor: pointer;
-    font-size: 1rem;
-    padding: 5px;
-    transition: var(--transicao-padrao);
+    font-size: 18px;
+    margin-left: 10px;
 }
 
 .alerta__botao-fechar:hover {
