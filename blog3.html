@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logística Reversa: O Que É e Como Funciona</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(135deg, #0d47a1, #1976d2);
+      color: white;
+      padding: 40px 0;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    h2 {
+      font-size: 2rem;
+      color: #0d47a1;
+      margin-top: 40px;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 10px;
+    }
+    h3 {
+      font-size: 1.4rem;
+      color: #0d47a1;
+      margin-top: 30px;
+    }
+    .highlight-box {
+      background-color: #e3f2fd;
+      border-left: 6px solid #1976d2;
+      padding: 25px;
+      margin: 30px 0;
+      border-radius: 8px;
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      transition: transform 0.3s ease;
+    }
+    .highlight-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .highlight-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+    .cta-button {
+      display: inline-block;
+      background-color: #1565c0;
+      color: white;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 50px;
+      font-weight: bold;
+      text-decoration: none;
+      margin: 30px auto;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(21, 101, 192, 0.3);
+    }
+    .cta-button:hover {
+      background-color: #0d47a1;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(21, 101, 192, 0.4);
+    }
+    footer {
+      background: linear-gradient(135deg, #0d47a1, #1976d2);
+      color: white;
+      text-align: center;
+      padding: 30px 0;
+      margin-top: 60px;
+    }
+    .image-container {
+      margin: 30px 0;
+      text-align: center;
+    }
+    .image-container img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .image-caption {
+      font-style: italic;
+      color: #666;
+      margin-top: 8px;
+      font-size: 0.9rem;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 25px;
+    }
+    li:before {
+      content: "✓";
+      color: #1976d2;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+    .intro-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+    .conclusion-box {
+      background-color: #f5f5f5;
+      border-radius: 8px;
+      padding: 30px;
+      margin: 40px 0;
+      text-align: center;
+      border: 1px solid #e0e0e0;
+    }
+    .step {
+      display: flex;
+      margin-bottom: 30px;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .step-number {
+      background-color: #1976d2;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+    .step-content {
+      flex: 1;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 25px 0;
+    }
+    th, td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #e3f2fd;
+      color: #0d47a1;
+    }
+    tr:hover {
+      background-color: #f5f5f5;
+    }
+    .comparison {
+      display: flex;
+      gap: 30px;
+      margin: 40px 0;
+    }
+    .comparison-box {
+      flex: 1;
+      padding: 20px;
+      border-radius: 8px;
+      background-color: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .comparison-title {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      color: #0d47a1;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Logística Reversa</h1>
+      <p>O caminho sustentável dos produtos após o consumo</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <h2>O que é Logística Reversa?</h2>
+    <p class="intro-text">A logística reversa é um instrumento de desenvolvimento econômico e social que consiste em um conjunto de ações para viabilizar a coleta e a restituição dos resíduos sólidos ao setor empresarial, para reaproveitamento em seu ciclo ou em outros ciclos produtivos, ou outra destinação final ambientalmente adequada.</p>
+
+    <div class="image-container">
+      <img src="./assets/logistica-reversa-1024x969.jpeg" alt="Ciclo da logística reversa">
+      <div class="image-caption">Fluxo completo do processo de logística reversa</div>
+    </div>
+
+    <div class="highlight-box">
+      <div class="highlight-icon"></div>
+      <div>
+        <h3>Por que a logística reversa é importante?</h3>
+        <p>A logística reversa é fundamental para a economia circular, reduzindo o impacto ambiental dos resíduos e promovendo o reaproveitamento de materiais. Segundo a Política Nacional de Resíduos Sólidos (PNRS), fabricantes, importadores, distribuidores e comerciantes são responsáveis pelo ciclo de vida dos produtos.</p>
+      </div>
+    </div>
+
+    <h2>Como funciona a logística reversa?</h2>
+
+    <div class="step">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h3>Devolução do produto pelo consumidor</h3>
+        <p>O consumidor leva o produto ou embalagem pós-consumo para pontos de coleta específicos, que podem estar em estabelecimentos comerciais, postos de entrega voluntária ou através de coleta domiciliar em alguns casos.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h3>Transporte e triagem</h3>
+        <p>Os materiais coletados são transportados para centrais de triagem onde são separados por tipo e condição. Alguns podem ser reutilizados diretamente, outros precisarão de reciclagem ou tratamento especial.</p>
+      </div>
+    </div>
+
+    <div class="image-container">
+      <img src="./assets/triagem.jpg" alt="Centro de triagem de materiais">
+      <div class="image-caption">Centro de triagem para materiais em logística reversa</div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h3>Processamento e transformação</h3>
+        <p>Os materiais passam por processos específicos conforme sua natureza: reciclagem mecânica ou química, remanufatura, recondicionamento ou tratamento para disposição final adequada quando não há possibilidade de reaproveitamento.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">4</div>
+      <div class="step-content">
+        <h3>Reintrodução no ciclo produtivo</h3>
+        <p>Os materiais processados retornam como matéria-prima para a indústria, fechando o ciclo da economia circular. Alguns exemplos incluem garrafas PET que viram fibras têxteis ou eletrônicos que têm peças recuperadas.</p>
+      </div>
+    </div>
+
+    <div class="comparison">
+      <div class="comparison-box">
+        <div class="comparison-title">Logística Tradicional</div>
+        <ul>
+          <li>Fluxo direto (fabricante → consumidor)</li>
+          <li>Foco na distribuição</li>
+          <li>Objetivo: entregar produtos</li>
+          <li>Modelo linear</li>
+        </ul>
+      </div>
+      <div class="comparison-box">
+        <div class="comparison-title">Logística Reversa</div>
+        <ul>
+          <li>Fluxo inverso (consumidor → fabricante)</li>
+          <li>Foco na recuperação</li>
+          <li>Objetivo: reaproveitar recursos</li>
+          <li>Modelo circular</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>Quais produtos têm logística reversa obrigatória?</h2>
+    
+    <table>
+      <tr>
+        <th>Produto</th>
+        <th>Como descartar</th>
+        <th>Benefícios</th>
+      </tr>
+      <tr>
+        <td>Eletrônicos</td>
+        <td>Pontos de coleta em lojas ou fabricantes</td>
+        <td>Recuperação de metais preciosos</td>
+      </tr>
+      <tr>
+        <td>Pilhas e baterias</td>
+        <td>Postos em supermercados e lojas</td>
+        <td>Evita contaminação por metais pesados</td>
+      </tr>
+      <tr>
+        <td>Lâmpadas fluorescentes</td>
+        <td>Lojas de material elétrico ou fabricantes</td>
+        <td>Reciclagem do mercúrio</td>
+      </tr>
+      <tr>
+        <td>Embalagens de agrotóxicos</td>
+        <td>Postos de recebimento autorizados</td>
+        <td>Destruição segura de resíduos tóxicos</td>
+      </tr>
+      <tr>
+        <td>Óleo lubrificante</td>
+        <td>Postos de coleta especializados</td>
+        <td>Re-refino para novo óleo</td>
+      </tr>
+      <tr>
+        <td>Pneus</td>
+        <td>Pontos de coleta de revendedores</td>
+        <td>Transformação em asfalto-borracha</td>
+      </tr>
+    </table>
+
+    <div class="highlight-box">
+      <div class="highlight-icon"></div>
+      <div>
+        <h3>Responsabilidade compartilhada</h3>
+        <p>A logística reversa funciona através da responsabilidade compartilhada entre fabricantes, distribuidores, comerciantes, consumidores e poder público. Cada elo da cadeia tem obrigações específicas para garantir o retorno adequado dos produtos após o consumo.</p>
+      </div>
+    </div>
+
+    <h2>Como você pode participar?</h2>
+    
+    <div class="image-container">
+      <img src="https://images.unsplash.com/photo-1581578017427-1a7b6a615d0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Pessoa descartando eletrônicos">
+      <div class="image-caption">Descarte consciente de eletrônicos em ponto de coleta</div>
+    </div>
+    
+    <ul>
+      <li><strong>Separe corretamente</strong> os produtos que precisam de logística reversa</li>
+      <li><strong>Procure pontos de coleta</strong> em sua cidade para cada tipo de material</li>
+      <li><strong>Exija informações</strong> dos fabricantes sobre como descartar seus produtos</li>
+      <li><strong>Participe</strong> de programas municipais de coleta seletiva</li>
+      <li><strong>Conscientize</strong> familiares e amigos sobre a importância da logística reversa</li>
+      <li><strong>Prefira empresas</strong> que tenham programas de logística reversa bem estruturados</li>
+    </ul>
+
+    <div style="text-align: center;">
+      <a href="" class="cta-button">Encontrar Pontos de Coleta Próximos</a>
+    </div>
+
+    <div class="conclusion-box">
+      <h3>Juntos por uma economia circular</h3>
+      <p>A logística reversa é mais que uma obrigação legal - é uma mudança de paradigma em direção a um modelo de produção e consumo sustentável. Quando cada um faz sua parte, transformamos resíduos em recursos, reduzimos impactos ambientais e construímos uma sociedade mais consciente. Qual produto você vai devolver para o ciclo produtivo hoje?</p>
+      
+      <div class="image-container">
+        <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Economia circular">
+        <div class="image-caption">O futuro é circular - nada se perde, tudo se transforma</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Econecta. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+</body>
+</html>

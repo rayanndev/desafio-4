@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compostagem em Apartamentos</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(135deg, #5a7247, #8a9a5b);
+      color: white;
+      padding: 40px 0;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    h2 {
+      font-size: 2rem;
+      color: #5a7247;
+      margin-top: 40px;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 10px;
+    }
+    h3 {
+      font-size: 1.4rem;
+      color: #5a7247;
+      margin-top: 30px;
+    }
+    .highlight-box {
+      background-color: #f1f8e9;
+      border-left: 6px solid #8a9a5b;
+      padding: 25px;
+      margin: 30px 0;
+      border-radius: 8px;
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      transition: transform 0.3s ease;
+    }
+    .highlight-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .highlight-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+    .cta-button {
+      display: inline-block;
+      background-color: #689f38;
+      color: white;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 50px;
+      font-weight: bold;
+      text-decoration: none;
+      margin: 30px auto;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(104, 159, 56, 0.3);
+    }
+    .cta-button:hover {
+      background-color: #558b2f;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(104, 159, 56, 0.4);
+    }
+    footer {
+      background: linear-gradient(135deg, #5a7247, #8a9a5b);
+      color: white;
+      text-align: center;
+      padding: 30px 0;
+      margin-top: 60px;
+    }
+    .image-container {
+      margin: 30px 0;
+      text-align: center;
+    }
+    .image-container img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .image-caption {
+      font-style: italic;
+      color: #666;
+      margin-top: 8px;
+      font-size: 0.9rem;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 25px;
+    }
+    li:before {
+      content: "✓";
+      color: #689f38;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+    .intro-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+    .conclusion-box {
+      background-color: #f5f5f5;
+      border-radius: 8px;
+      padding: 30px;
+      margin: 40px 0;
+      text-align: center;
+      border: 1px solid #e0e0e0;
+    }
+    .step {
+      display: flex;
+      margin-bottom: 30px;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .step-number {
+      background-color: #8a9a5b;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+    .step-content {
+      flex: 1;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 25px 0;
+    }
+    th, td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #f1f8e9;
+      color: #5a7247;
+    }
+    tr:hover {
+      background-color: #f5f5f5;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Compostagem em Apartamentos</h1>
+      <p>Transforme seu lixo orgânico em adubo mesmo em espaços pequenos</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <h2>Por que fazer compostagem em apartamento?</h2>
+    <p class="intro-text">A compostagem doméstica é uma forma eficiente de reduzir em até 50% o lixo que vai para aterros sanitários. Em apartamentos, essa prática parece desafiadora, mas com as técnicas certas é perfeitamente viável e sem odores. Além de contribuir com o meio ambiente, você produz um adubo natural excelente para suas plantas.</p>
+
+    <div class="image-container">
+      <img src="./assets/kit-composteira.webp" alt="Composteira doméstica em apartamento">
+      <div class="image-caption">Composteira compacta perfeita para ambientes pequenos</div>
+    </div>
+
+    <div class="highlight-box">
+      <div class="highlight-icon"></div>
+      <div>
+        <h3>Benefícios da compostagem em apartamentos</h3>
+        <p>Reduz o lixo orgânico, produz adubo natural, diminui o uso de fertilizantes químicos, evita a emissão de metano em aterros e pode ser feita sem mau cheiro quando feita corretamente. Uma família de 4 pessoas pode compostar até 1kg de resíduos por dia!</p>
+      </div>
+    </div>
+
+    <h2>Como começar sua compostagem em 5 passos</h2>
+
+    <div class="step">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h3>Escolha o método adequado</h3>
+        <p>Para apartamentos, os métodos mais indicados são:</p>
+        <ul>
+          <li><strong>Composteira de minhocas (vermicompostagem):</strong> Utiliza minhocas californianas para acelerar o processo. Ideal para quem quer adubo líquido e sólido.</li>
+          <li><strong>Bokashi:</strong> Método japonês que usa microrganismos eficientes. Não precisa de minhocas e processa até carnes e laticínios.</li>
+          <li><strong>Composteira elétrica:</strong> Opção automática e compacta, perfeita para quem busca praticidade.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h3>Prepare o local e os materiais</h3>
+        <p>Escolha um local arejado como varanda, área de serviço ou até debaixo da pia. Você precisará de:</p>
+        <ul>
+          <li>Composteira (pode ser comprada ou feita com baldes)</li>
+          <li>Minhocas californianas (para vermicompostagem)</li>
+          <li>Serragem ou folhas secas (material seco)</li>
+          <li>Borrifador com água</li>
+          <li>Pá pequena para revirar</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="image-container">
+      <img src="./assets/33c724bcc065222e22cd6d56b9729271.jpg" alt="Materiais para compostagem">
+      <div class="image-caption">Materiais básicos para começar sua compostagem</div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h3>Separe corretamente os resíduos</h3>
+        <p>Nem todo resíduo orgânico pode ser compostado em apartamentos. Veja o que pode e o que evitar:</p>
+        
+        <table>
+          <tr>
+            <th>Pode compostar</th>
+            <th>Evite</th>
+          </tr>
+          <tr>
+            <td>Cascas de frutas e legumes</td>
+            <td>Carnes e peixes (exceto no Bokashi)</td>
+          </tr>
+          <tr>
+            <td>Borras de café e filtros</td>
+            <td>Laticínios (exceto no Bokashi)</td>
+          </tr>
+          <tr>
+            <td>Cascas de ovos trituradas</td>
+            <td>Gorduras e óleos</td>
+          </tr>
+          <tr>
+            <td>Folhas de chá e ervas</td>
+            <td>Fezes de animais</td>
+          </tr>
+          <tr>
+            <td>Jornais não-coloridos picados</td>
+            <td>Plantas doentes</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">4</div>
+      <div class="step-content">
+        <h3>Monte e mantenha sua composteira</h3>
+        <p>Siga esta sequência para montar sua composteira de minhocas:</p>
+        <ol>
+          <li>Coloque uma camada de material seco (serragem, folhas secas) no fundo</li>
+          <li>Adicione os resíduos orgânicos picados em pequenos pedaços</li>
+          <li>Cubra com outra camada de material seco (isso evita odores)</li>
+          <li>Adicione as minhocas californianas</li>
+          <li>Mantenha a umidade (deve parecer uma esponja úmida)</li>
+          <li>Revire a mistura a cada 3-4 dias para aerar</li>
+        </ol>
+      </div>
+    </div>
+
+
+    <div class="step">
+      <div class="step-number">5</div>
+      <div class="step-content">
+        <h3>Colha e use seu composto</h3>
+        <p>Em 2-3 meses você terá:</p>
+        <ul>
+          <li><strong>Húmus:</strong> Adubo sólido rico em nutrientes para suas plantas</li>
+          <li><strong>Chorume:</strong> Líquido que pode ser diluído (1:10) e usado como fertilizante</li>
+        </ul>
+        <p>Dica: Se aparecerem mosquitinhos, aumente a camada de material seco e evite frutas muito maduras.</p>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <div class="highlight-icon"></div>
+      <div>
+        <h3>Dicas para evitar odores</h3>
+        <p>O segredo para uma compostagem sem cheiro está no equilíbrio entre materiais úmidos (nitrogenados) e secos (carbonados). Mantenha sempre 2 partes de material seco para 1 parte de material úmido. Se notar mau cheiro, adicione mais serragem, folhas secas ou jornal picado e revolva mais frequentemente.</p>
+      </div>
+    </div>
+
+    <h2>Soluções para espaços mínimos</h2>
+    
+    <ul>
+      <li><strong>Composteira vertical:</strong> Empilhe baldes ou use modelos comerciais que ocupam menos de 30cm²</li>
+      <li><strong>Bokashi sob a pia:</strong> O método japonês cabe até em armários de cozinha</li>
+      <li><strong>Compostagem compartilhada:</strong> Combine com vizinhos para ter uma composteira no condomínio</li>
+      <li><strong>Serviços de coleta:</strong> Em algumas cidades, empresas recolhem o orgânico para compostagem</li>
+      <li><strong>Mini composteira elétrica:</strong> Alguns modelos são do tamanho de uma cafeteira</li>
+    </ul>
+
+    <div style="text-align: center;">
+      <a href="https://www.ppgpe.eel.usp.br/sites/files/www.ppgpe.eel.usp.br/publico/2024-04/v3-cartilha-de-compostagem-ii-30_01_2023-apos-durval-folha-em-branco.pdf" class="cta-button">Baixe nosso Guia Completo de Compostagem</a>
+    </div>
+
+    <div class="conclusion-box">
+      <h3>Um pequeno gesto, um grande impacto</h3>
+      <p>Começar a compostar em apartamento é mais simples do que parece e traz benefícios imediatos para seu lar e para o planeta. Com 10 minutos semanais de manutenção, você transforma o que seria lixo em vida para suas plantas e reduz significativamente seu impacto ambiental. Qual será sua primeira ação hoje?</p>
+      
+      <div class="image-container">
+        <img src="./assets/adubocaseiro1.jpg" alt="Plantas crescendo com composto">
+        <div class="image-caption">Plantas mais saudáveis com seu próprio adubo caseiro</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Econecta. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+</body>
+</html>
